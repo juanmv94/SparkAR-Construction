@@ -82,14 +82,18 @@ var modoBorrar=false;
 var color=0;
 
 labelRestantes.text=bloquesNoUsados.length.toString();
+Patches.setBooleanValue("hideTouchInstruction",false);
 
 function cTouch(c) {
 	if (c==0) {
 		modoBorrar=true;
+		if (bloquesUsados.length==0) Patches.setBooleanValue("hideTouchInstruction",true);
 		audioBoton.play();
+		
 	}
 	else {
 		modoBorrar=false;
+		if (bloquesUsados.length==0) Patches.setBooleanValue("hideTouchInstruction",false);
 		color=c-1;
 		audioCambiaColor.play();
 	}
@@ -161,6 +165,7 @@ function bTouch(b,c) {
 function ponerBloque(x,y,z) {
 	if (bloquesNoUsados.length==0) {}
 	else {
+		if (bloquesUsados.length==0) Patches.setBooleanValue("hideTouchInstruction",true);
 		let b=bloquesNoUsados.pop();
 		bloquesList[b].transform.x=x;
 		bloquesList[b].transform.z=z;
