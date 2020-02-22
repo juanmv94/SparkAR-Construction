@@ -1,3 +1,7 @@
+/*
+*   Construction by @Juanmv94 (R)2019
+*/
+
 //const Diagnostics = require('Diagnostics');
 const Scene = require('Scene');
 const TouchGestures = require('TouchGestures');
@@ -8,7 +12,7 @@ const NativeUI = require('NativeUI');
 const Patches = require('Patches');
 const Reactive= require('Reactive');
 
-const anchoPlataforma=8,altoPlataforma=8,nbloques=256,nmateriales=15,ncoloreshud=3;
+const anchoPlataforma=8,altoPlataforma=8,nbloques=256,nmateriales=21,ncoloreshud=3;
 const tamBloque=0.1;
 const dx=-(anchoPlataforma-1)*tamBloque*0.5, dz=-(altoPlataforma-1)*tamBloque*0.5, dybloque=tamBloque*0.5;
 
