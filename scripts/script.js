@@ -11,6 +11,7 @@ const Audio = require('Audio');
 const NativeUI = require('NativeUI');
 const Patches = require('Patches');
 const Reactive= require('Reactive');
+const Time= require('Time');
 
 const anchoPlataforma=8,altoPlataforma=8,nbloques=256,nmateriales=21,ncoloreshud=3;
 const tamBloque=0.1;
@@ -100,14 +101,15 @@ Promise.all([audiosp,materialesp,texturasp,texturagomap,scenep]).then(prs=>{
 		if (c==0) {
 			modoBorrar=true;
 			if (bloquesUsados.length==0) Patches.inputs.setBoolean("hideTouchInstruction",true);
-			audioBoton.play();
-			
+			audioBoton.reset();
+			audioBoton.setPlaying(true);
 		}
 		else {
 			modoBorrar=false;
 			if (bloquesUsados.length==0) Patches.inputs.setBoolean("hideTouchInstruction",false);
 			color=c-1;
-			audioCambiaColor.play();
+			audioCambiaColor.reset();
+			audioCambiaColor.setPlaying(true);
 		}
 	}
 
@@ -119,7 +121,8 @@ Promise.all([audiosp,materialesp,texturasp,texturagomap,scenep]).then(prs=>{
 				bloquesNoUsados.push(b);
 			}
 			labelRestantes.text=bloquesNoUsados.length.toString();
-			audioBorrar.play();
+			audioBorrar.reset();
+			audioBorrar.setPlaying(true);
 		}
 		else {
 			Patches.inputs.setPulse("resetTracker",Reactive.once());
@@ -135,7 +138,8 @@ Promise.all([audiosp,materialesp,texturasp,texturagomap,scenep]).then(prs=>{
 			bloquesList[b].hidden=true;
 			bloquesNoUsados.push(b);
 			labelRestantes.text=bloquesNoUsados.length.toString();
-			audioBorrar.play();
+			audioBorrar.reset();
+			audioBorrar.setPlaying(true);
 			bloquesUsados.splice(bloquesUsados.indexOf(b),1);
 		}
 		else {
@@ -184,9 +188,10 @@ Promise.all([audiosp,materialesp,texturasp,texturagomap,scenep]).then(prs=>{
 			bloquesList[b].transform.y=y;
 			for (let i=0;i<6;i++)
 				bloquesCarasList[b][i].material=materiales[color];
-			bloquesList[b].hidden=false;
+			Time.setTimeout(()=>bloquesList[b].hidden=false, 0);
 			labelRestantes.text=bloquesNoUsados.length.toString();
-			audioBloque.play();
+			audioBloque.reset();
+			audioBloque.setPlaying(true);
 			bloquesUsados.push(b);
 		}
 	}
